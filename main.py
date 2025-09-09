@@ -24,7 +24,7 @@ def main():
     AsteroidField.containers = (updatable,)
 
     player = Player(x, y)
-    AsteroidField()
+    field = AsteroidField()
 
     running = True
     while running:
@@ -34,9 +34,14 @@ def main():
         clock.tick(60)
 
         screen.fill((0, 0, 0))
+        updatable.update(dt)
+        for asteroid in asteroids:
+            if asteroid.collision(player):
+                dist = asteroid.position.distance_to(player.position)
+                print("Game over!")
+                raise SystemExit
         for item in drawable:
             item.draw(screen)
-        updatable.update(dt)
         pygame.display.flip()
 
     pygame.quit()
