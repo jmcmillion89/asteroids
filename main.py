@@ -43,6 +43,11 @@ def main():
                 dist = asteroid.position.distance_to(player.position)
                 print("Game over!")
                 raise SystemExit
+            for shot in shots:
+                if asteroid.collision(shot):
+                    shot_dist = asteroid.position.distance_to(shot.position)
+                    asteroid.split()
+
         for item in drawable:
             item.draw(screen)
         pygame.display.flip()
